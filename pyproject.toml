@@ -1,0 +1,13 @@
+[project]
+name = "testsbot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "aiogram>=3.24.0",
+    "dotenv>=0.9.9",
+    "groq>=1.0.0",
+    "openpyxl>=3.1.5",
+    "sqlalchemy>=2.0.45",
+]
