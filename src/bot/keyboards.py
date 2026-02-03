@@ -121,7 +121,10 @@ def start_test_kb(slug: str) -> InlineKeyboardMarkup:
     
 def my_tests_kb(all_tests: list, page: int) -> InlineKeyboardMarkup:
     """
-    
+    Клавиатура моих тестов с пагинацией
+
+    :param all_test: Массив тестов
+    :param page: Страница
     """
 
     keyboard = []

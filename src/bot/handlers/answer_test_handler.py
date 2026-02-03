@@ -10,6 +10,25 @@ from src.services.test_service import TestService
 
 router = Router()
 
+TEST_NOT_FOUND_ALERT = "⚠ Тест не найден"
+ENTER_FULLNAME_PROMPT = "Введите ваше <b>ФИО</b>:"
+INVALID_FULLNAME_WARNING = "⚠ Введите корректное <b>ФИО</b>!\nПример: <i>Иванов Иван Иванович</i>"
+SESSION_EXPIRED_ALERT = "Сессия истекла"
+TEST_COMPLETED_TEMPLATE = "<b>Тест завершен!</b>\n\nВаш результат: <code>{score}/{total}</code> <b>{percent}</b>%"
+RESULT_TO_OWNER_TEMPLATE = """
+<b>Результат теста</b>
+
+Тема: <i>{topic}</i>
+
+ФИО: {fullname}
+Telegram: {telegram_name} @{username}
+
+Баллы: {score}/{total}
+Процент: {percent}%
+Оценка: {grade}
+"""
+CANCEL_TEST_MSG = "Прохождение теста отменено"
+
 
 @router.callback_query(F.data.startswith("start_test:"))
 async def start_test(cb: CallbackQuery, state: FSMContext):
@@ -19,7 +38,7 @@ async def start_test(cb: CallbackQuery, state: FSMContext):
         test = TestService.get_test(db, slug)
         if not test:
             await cb.answer(
-                "⚠ Тест не найден",
+                TEST_NOT_FOUND_ALERT,
                 show_alert=True
             )
             return
@@ -28,7 +47,7 @@ async def start_test(cb: CallbackQuery, state: FSMContext):
     await state.update_data(slug=slug)
 
     await cb.message.edit_text(
-        "Введите ваше <b>ФИО</b>:",
+        ENTER_FULLNAME_PROMPT,
         reply_markup=cancel_kb("answer_test"),
         parse_mode="HTML"
     )
@@ -42,8 +61,7 @@ async def input_fullname(message: Message, state: FSMContext):
 
     if len(fullname.split()) < 2:
         await message.answer(
-            "⚠ Введите корректное <b>ФИО</b>!\n"
-            "Пример: <i>Иванов Иван Иванович</i>",
+            INVALID_FULLNAME_WARNING,
             parse_mode="HTML"
         )
         return
@@ -78,7 +96,7 @@ async def answer_test(cb: CallbackQuery, bot: Bot):
     with SessionLocal() as db:
         session = SessionService.get_session(db, cb.from_user.id)
         if not session:
-            await cb.answer("Сессия истекла", show_alert=True)
+            await cb.answer(SESSION_EXPIRED_ALERT, show_alert=True)
             return
 
         test = TestService.get_test(db, slug)
@@ -106,20 +124,26 @@ async def answer_test(cb: CallbackQuery, bot: Bot):
                 grade = "1"
 
             await cb.message.edit_text(
-                "🟢 <b>Тест завершен!</b>\n\n"
-                f"Ваш результат: <code>{score}/{total}</code> <b>{percent}</b>%",
+                TEST_COMPLETED_TEMPLATE.format(
+                    score=score,
+                    total=total,
+                    percent=percent
+                ),
                 parse_mode="HTML"
             )
 
             await bot.send_message(
                 test["owner_id"],
-                f"<b>Результат теста</b>\n\n"
-                f"Тема: <i>{test['topic']}</i>\n\n"
-                f"ФИО: {session['fullname']}\n"
-                f"Telegram: {cb.from_user.full_name} @{cb.from_user.username}\n\n"
-                f"Баллы: {score}/{total}\n"
-                f"Процент: {percent}%\n"
-                f"Оценка: {grade}",
+                RESULT_TO_OWNER_TEMPLATE.format(
+                    topic=test['topic'],
+                    fullname=session['fullname'],
+                    telegram_name=cb.from_user.full_name,
+                    username=cb.from_user.username or "",
+                    score=score,
+                    total=total,
+                    percent=percent,
+                    grade=grade
+                ),
                 parse_mode="HTML"
             )
 
@@ -127,7 +151,6 @@ async def answer_test(cb: CallbackQuery, bot: Bot):
 
             await cb.answer()
             return
-
 
         SessionService.update_session(
             db=db,
@@ -154,4 +177,4 @@ async def answer_test(cb: CallbackQuery, bot: Bot):
 async def cancel_test(cb: CallbackQuery, state: FSMContext):
     await state.clear()
     await cb.message.delete()
-    await cb.answer("Прохождение теста отменено")
+    await cb.answer(CANCEL_TEST_MSG)
