@@ -35,6 +35,8 @@ async def start_handler(message: Message):
             )
             return
 
+        await message.answer("🤖")
+
         # обычный /start
         await message.answer(
             BotTexts.START_MSG.format(first_name=message.from_user.first_name),

@@ -2,6 +2,7 @@ import asyncio
 import logging
 
 from aiogram import Bot, Dispatcher
+from aiogram.types import BotCommand
 from aiogram.fsm.storage.memory import MemoryStorage
 
 from src.bot.handlers import routers
@@ -18,6 +19,12 @@ async def main():
     
     for router in routers:
         dp.include_router(router)
+    
+    commands = [
+        BotCommand(command="start", description="Запустить бота"),
+        BotCommand(command="info", description="Информация о боте")
+    ]
+    await bot.set_my_commands(commands)
     
     await dp.start_polling(bot)
 
