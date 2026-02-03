@@ -3,14 +3,13 @@ from aiogram.filters import CommandStart
 from aiogram.types import Message, CallbackQuery
 from aiogram.fsm.context import FSMContext
 
-from src.bot.keyboards import start_kb, start_test_kb
-from src.db.database import SessionLocal
 from src.services.test_service import TestService
+from src.bot.keyboards import start_kb, start_test_kb
+from src.bot.texts import BotTexts
+from src.db.database import SessionLocal
+
 
 router = Router()
-
-START_MSG = "👋🏻 Привет {first_name}!\n\nЯ - бот для образовательных тестирований."
-TEST_PREVIEW = "Тест <b>{topic}</b>\nВопросов: {questions_count}"
 
 @router.message(CommandStart())
 async def start_handler(message: Message):
@@ -23,11 +22,11 @@ async def start_handler(message: Message):
             test = TestService.get_test(db, slug)
 
             if not test:
-                await message.answer("Тест не найден!")
+                await message.answer(BotTexts.TEST_NOT_FOUND_ALERT)
                 return
 
             await message.answer(
-                TEST_PREVIEW_TEMPLATE.format(
+                BotTexts.TEST_PREVIEW.format(
                     topic=test['topic'],
                     questions_count=len(test['questions'])
                 ),
@@ -38,7 +37,7 @@ async def start_handler(message: Message):
 
         # обычный /start
         await message.answer(
-            START_MSG.format(first_name=message.from_user.first_name),
+            BotTexts.START_MSG.format(first_name=message.from_user.first_name),
             reply_markup=start_kb()
         )
         
@@ -48,7 +47,7 @@ async def back_to_start(cb: CallbackQuery):
     await cb.answer()
     
     await cb.message.edit_text(
-        START_MSG.format(first_name=cb.from_user.first_name),
+        BotTexts.START_MSG.format(first_name=cb.from_user.first_name),
         reply_markup=start_kb()
     )
 
@@ -58,8 +57,14 @@ async def cancel_test(cb: CallbackQuery, state: FSMContext):
     await state.clear()
 
     await cb.message.edit_text(
-        START_MSG.format(first_name=cb.from_user.first_name),
+        BotTexts.START_MSG.format(first_name=cb.from_user.first_name),
         reply_markup=start_kb()
     )
 
     await cb.answer("Создание теста отменено")
+    
+    
+@router.callback_query(F.data == "close")
+async def close(cb: CallbackQuery):
+    await cb.answer()
+    await cb.message.delete()

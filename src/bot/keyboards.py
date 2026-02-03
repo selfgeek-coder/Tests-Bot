@@ -1,6 +1,8 @@
+from math import ceil
+
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-from math import ceil
+from src.bot.texts import BotTexts
 
 def start_kb() -> InlineKeyboardMarkup:
     """
@@ -8,8 +10,8 @@ def start_kb() -> InlineKeyboardMarkup:
     """
     return InlineKeyboardMarkup(
         inline_keyboard=[
-            [InlineKeyboardButton(text="Создать тест", callback_data="create_test")],
-            [InlineKeyboardButton(text="Мои тесты", callback_data="my_tests")]
+            [InlineKeyboardButton(text=BotTexts.BTN_CREATE_TEST, callback_data="create_test")],
+            [InlineKeyboardButton(text=BotTexts.BTN_MY_TESTS, callback_data="my_tests")]
         ]
     )
 
@@ -23,12 +25,28 @@ def cancel_kb(a: str) -> InlineKeyboardMarkup:
         inline_keyboard=[
             [
                 InlineKeyboardButton(
-                    text="Отмена",
+                    text=BotTexts.BTN_CANCEL,
                     callback_data=f"cancel_{a}"
                 )
             ]
         ]
     )
+    
+def close_kb() -> InlineKeyboardMarkup:
+    """
+    Клавиатура с кнопкой закрыть.
+    """
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text=BotTexts.BTN_CLOSE,
+                    callback_data=f"close"
+                )
+            ]
+        ]
+    )
+    
     
 def back_kb(a: str) -> InlineKeyboardMarkup:
     """
@@ -40,7 +58,7 @@ def back_kb(a: str) -> InlineKeyboardMarkup:
         inline_keyboard=[
             [
                 InlineKeyboardButton(
-                    text="‹ Назад",
+                    text=BotTexts.BTN_BACK,
                     callback_data=f"back_to_{a}"
                 )
             ]
@@ -59,13 +77,13 @@ def delete_confirm_kb(slug: str) -> InlineKeyboardMarkup:
         inline_keyboard=[
             [
                 InlineKeyboardButton(
-                    text="Да, удалить",
+                    text=BotTexts.BTN_YES_DELETE,
                     callback_data=f"delete_test_confirm:{slug}"
                 )
             ],
             [
                 InlineKeyboardButton(
-                    text="Отмена",
+                    text=BotTexts.BTN_NO_DELETE,
                     callback_data="delete_test_cancel"
                 )
             ]
@@ -102,8 +120,8 @@ def preview_kb() -> InlineKeyboardMarkup:
     
     return InlineKeyboardMarkup(
         inline_keyboard=[
-            [InlineKeyboardButton(text="✅ Подтвердить", callback_data="confirm_test")],
-            [InlineKeyboardButton(text="Отменить", callback_data="cancel_test")]
+            [InlineKeyboardButton(text=BotTexts.BTN_CONFIRM, callback_data="confirm_test")],
+            [InlineKeyboardButton(text=BotTexts.BTN_CANCEL_TEST, callback_data="cancel_test")]
         ]
     )
     
@@ -115,7 +133,7 @@ def start_test_kb(slug: str) -> InlineKeyboardMarkup:
     
     return InlineKeyboardMarkup(
         inline_keyboard=[
-            [InlineKeyboardButton(text="▶ Начать прохождение", callback_data=f"start_test:{slug}")]
+            [InlineKeyboardButton(text=BotTexts.BTN_START_TEST, callback_data=f"start_test:{slug}")]
         ]
     )
     
@@ -123,7 +141,7 @@ def my_tests_kb(all_tests: list, page: int) -> InlineKeyboardMarkup:
     """
     Клавиатура моих тестов с пагинацией
 
-    :param all_test: Массив тестов
+    :param all_tests: Массив тестов
     :param page: Страница
     """
 
@@ -151,7 +169,7 @@ def my_tests_kb(all_tests: list, page: int) -> InlineKeyboardMarkup:
     if page > 1:
         nav.append(
             InlineKeyboardButton(
-                text="⬅️",
+                text=BotTexts.BTN_PREV_PAGE,
                 callback_data=f"my_tests_page:{page - 1}"
             )
         )
@@ -166,7 +184,7 @@ def my_tests_kb(all_tests: list, page: int) -> InlineKeyboardMarkup:
     if page < pages:
         nav.append(
             InlineKeyboardButton(
-                text="➡️",
+                text=BotTexts.BTN_NEXT_PAGE,
                 callback_data=f"my_tests_page:{page + 1}"
             )
         )
@@ -174,7 +192,7 @@ def my_tests_kb(all_tests: list, page: int) -> InlineKeyboardMarkup:
     keyboard.append(nav)
 
     keyboard.append([
-        InlineKeyboardButton(text="‹ Назад", callback_data="back_to_start")
+        InlineKeyboardButton(text=BotTexts.BTN_BACK, callback_data="back_to_start")
     ])
 
     return InlineKeyboardMarkup(inline_keyboard=keyboard)
@@ -185,44 +203,26 @@ def test_manage_kb(slug: str) -> InlineKeyboardMarkup:
         inline_keyboard=[
             [
                 InlineKeyboardButton(
-                    text="Скачать результаты",
+                    text=BotTexts.BTN_DOWNLOAD_RESULTS,
                     callback_data=f"export_results:{slug}"
                 )
             ],
             [
                 InlineKeyboardButton(
-                    text="Удалить",
+                    text=BotTexts.BTN_CREATE_QR,
+                    callback_data=f"download_qr:{slug}"
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    text=BotTexts.BTN_DELETE,
                     callback_data=f"delete_test:{slug}"
                 )
             ],
             [
                 InlineKeyboardButton(
-                    text="‹ Назад",
+                    text=BotTexts.BTN_BACK,
                     callback_data="my_tests"
-                )
-            ]
-        ]
-    )
-    
-def delete_confirm_kb(slug: str) -> InlineKeyboardMarkup:
-    """
-    Генерирует клавиатуру для подтверждения удаления теста.
-    
-    :param slug: ID теста
-    :return: InlineKeyboardMarkup с кнопками "Да, удалить" и "Отмена"
-    """
-    return InlineKeyboardMarkup(
-        inline_keyboard=[
-            [
-                InlineKeyboardButton(
-                    text="Да, удалить",
-                    callback_data=f"delete_test_confirm:{slug}"
-                )
-            ],
-            [
-                InlineKeyboardButton(
-                    text="Отмена",
-                    callback_data="delete_test_cancel"
                 )
             ]
         ]

@@ -9,32 +9,35 @@ class AiService:
         """Функция для создания теста, возвращает строгий JSON"""
 
         client = Groq(api_key=api_key)
+        client = Groq(api_key=api_key)
+
+        system_prompt = (
+            "Ты создаешь школьные тесты для учеников. "
+            "Отвечай ТОЛЬКО валидным JSON, строго соответствующим формату ниже, "
+            "без любых комментариев, пояснений или текста вне JSON.\n\n"
+            "Формат JSON:\n"
+            "{\n"
+            '  "questions": [\n'
+            "    {\n"
+            '      "question": "Текст вопроса",\n'
+            '      "options": {\n'
+            '        "A": "вариант A",\n'
+            '        "B": "вариант B",\n'
+            '        "C": "вариант C",\n'
+            '        "D": "вариант D"\n'
+            "      },\n"
+            '      "correct": "A"  # одна из букв: A, B, C, D\n'
+            "    }\n"
+            "  ]\n"
+            "}\n"
+            "Каждый вопрос должен иметь 4 варианта (A, B, C, D) и правильный ответ."
+        )
+
         response = await asyncio.to_thread(
             client.chat.completions.create,
             model="llama-3.3-70b-versatile",
             messages=[
-                {
-                    "role": "system",
-                    "content": (
-                        "Ты создаешь школьные тесты. "
-                        "Отвечай ТОЛЬКО валидным JSON без пояснений. "
-                        "Формат:\n"
-                        "{\n"
-                        '  "questions": [\n'
-                        "    {\n"
-                        '      "question": "Текст вопроса",\n'
-                        '      "options": {\n'
-                        '        "A": "вариант A",\n'
-                        '        "B": "вариант B",\n'
-                        '        "C": "вариант C",\n'
-                        '        "D": "вариант D"\n'
-                        "      },\n"
-                        '      "correct": "A"\n'
-                        "    }\n"
-                        "  ]\n"
-                        "}"
-                    ),
-                },
+                {"role": "system", "content": system_prompt},
                 {"role": "user", "content": question},
             ],
             temperature=0.7,

@@ -13,7 +13,11 @@ class TestRepository:
 
     @staticmethod
     def get_tests_by_owner(db: Session, owner_id: int) -> List[Test]:
-        return db.query(Test).filter(Test.owner_id == owner_id).all()
+        return db.query(Test)\
+                .filter(Test.owner_id == owner_id)\
+                .order_by(Test.created_at.desc())\
+                .all()
+
 
     @staticmethod
     def delete_test(db: Session, test: Test) -> None:
