@@ -23,7 +23,7 @@ class BotTexts:
 """
     
     # /start menu
-    START_MSG = "Привет {first_name}!\n\nЯ - бот для образовательных тестирований."
+    START_MSG = "Привет {first_name}!\n\nЯ - бот для создания образовательных тестирований."
     TEST_PREVIEW = "<b>{topic}</b>\n\nКоличество вопросов: {questions_count}"
 
     # my tests
@@ -36,7 +36,7 @@ class BotTexts:
     DELETE_TEST_CANCEL_MSG = "Удаление отменено."
     EXPORT_PROCESSING_MSG = "Формирую Excel..."
     QR_PROCESSING_MSG = "Формирую QR..."
-    TEST_DETAILS_TEMPLATE = "<b>{topic}</b>\n\nВопросов: <code>{questions_count}</code>\n\nСсылка для прохождения: {test_link}"
+    TEST_DETAILS_TEMPLATE = "<b>{topic}</b>\n\nКоличество вопросов: <code>{questions_count}</code>\n\nСсылка для прохождения: {test_link}"
 
     # create test
     CREATE_TEST_PROMPT = "Введите тему тестирования\n\nНапример:\n<code>Физика 8 класс, кипение воды</code>"

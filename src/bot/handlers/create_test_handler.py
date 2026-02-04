@@ -29,7 +29,7 @@ async def create_test(cb: CallbackQuery, state: FSMContext):
     await cb.message.answer(
         BotTexts.CREATE_TEST_PROMPT,
         parse_mode="HTML",
-        reply_markup=cancel_kb("create_test")
+        reply_markup=cancel_kb("test")
     )
     
     await state.set_state(CreateTestFSM.topic)

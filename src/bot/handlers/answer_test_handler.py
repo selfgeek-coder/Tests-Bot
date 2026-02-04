@@ -28,6 +28,8 @@ async def start_test(cb: CallbackQuery, state: FSMContext):
     await state.set_state(PassTestFSM.waiting_fullname)
     await state.update_data(slug=slug)
 
+    await cb.answer("🖊")
+
     await cb.message.edit_text(
         BotTexts.ENTER_FULLNAME_PROMPT,
         reply_markup=cancel_kb("answer_test"),

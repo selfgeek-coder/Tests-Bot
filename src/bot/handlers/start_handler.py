@@ -54,7 +54,7 @@ async def back_to_start(cb: CallbackQuery):
     )
 
 
-@router.callback_query(F.data == "cancel_create_test")
+@router.callback_query(F.data == "cancel_test")
 async def cancel_test(cb: CallbackQuery, state: FSMContext):
     await state.clear()
 
