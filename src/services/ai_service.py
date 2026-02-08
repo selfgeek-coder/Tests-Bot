@@ -42,7 +42,7 @@ class AiService:
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": question},
             ],
-            temperature=0.3,
+            temperature=0.1,
             max_tokens=5000,
         )
         
