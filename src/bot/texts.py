@@ -23,14 +23,14 @@ class BotTexts:
 """
     
     # /start menu
-    START_MSG = "Привет {first_name}!\n\nЯ - бот для создания образовательных тестирований."
+    START_MSG = "Привет, {first_name}!\n\nЯ бот для создания образовательных тестирований."
     TEST_PREVIEW = "<b>{topic}</b>\n\nКоличество вопросов: {questions_count}"
 
     # my tests
-    MY_TESTS_EMPTY_MSG = "У вас пока нет тестов. Создайте новый тест в главном меню."
+    MY_TESTS_EMPTY_MSG = "У вас пока нет тестов... Создайте новый тест в главном меню."
     MY_TESTS_TITLE = "Ваши тесты"
     TEST_NOT_FOUND_MSG = "Тест не найден"
-    DELETE_TEST_CONFIRM_MSG = "‼ Вы уверены, что хотите удалить этот тест?\n<b>Это действие будет необратимо</b>."
+    DELETE_TEST_CONFIRM_MSG = "Вы уверены, что хотите удалить этот тест?\n<b>Это действие будет необратимо</b>."
     DELETE_TEST_ERROR_MSG = "Ошибка при удалении теста"
     DELETE_TEST_SUCCESS_MSG = "Тест успешно удален."
     DELETE_TEST_CANCEL_MSG = "Удаление отменено."
