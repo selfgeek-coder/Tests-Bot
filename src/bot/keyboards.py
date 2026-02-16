@@ -10,8 +10,16 @@ def start_kb() -> InlineKeyboardMarkup:
     """
     return InlineKeyboardMarkup(
         inline_keyboard=[
-            [InlineKeyboardButton(text=BotTexts.BTN_CREATE_TEST, callback_data="create_test")],
-            [InlineKeyboardButton(text=BotTexts.BTN_MY_TESTS, callback_data="my_tests")]
+            [InlineKeyboardButton(
+                text=BotTexts.BTN_CREATE_TEST,
+                callback_data="create_test",
+                icon_custom_emoji_id="5879841310902324730")
+            ],
+            [InlineKeyboardButton(
+                text=BotTexts.BTN_MY_TESTS,
+                callback_data="my_tests",
+                icon_custom_emoji_id="5875206779196935950")
+            ]
         ]
     )
 
@@ -26,7 +34,8 @@ def cancel_kb(a: str) -> InlineKeyboardMarkup:
             [
                 InlineKeyboardButton(
                     text=BotTexts.BTN_CANCEL,
-                    callback_data=f"cancel_{a}"
+                    callback_data=f"cancel_{a}",
+                    icon_custom_emoji_id="5985346521103604145"
                 )
             ]
         ]
@@ -41,7 +50,8 @@ def close_kb() -> InlineKeyboardMarkup:
             [
                 InlineKeyboardButton(
                     text=BotTexts.BTN_CLOSE,
-                    callback_data=f"close"
+                    callback_data=f"close",
+                    icon_custom_emoji_id="5985346521103604145"
                 )
             ]
         ]
@@ -59,7 +69,8 @@ def back_kb(a: str) -> InlineKeyboardMarkup:
             [
                 InlineKeyboardButton(
                     text=BotTexts.BTN_BACK,
-                    callback_data=f"back_to_{a}"
+                    callback_data=f"back_to_{a}",
+                    icon_custom_emoji_id="5875082500023258804"
                 )
             ]
         ]
@@ -78,13 +89,15 @@ def delete_confirm_kb(slug: str) -> InlineKeyboardMarkup:
             [
                 InlineKeyboardButton(
                     text=BotTexts.BTN_YES_DELETE,
-                    callback_data=f"delete_test_confirm:{slug}"
+                    callback_data=f"delete_test_confirm:{slug}",
+                    icon_custom_emoji_id="5985596818912712352"
                 )
             ],
             [
                 InlineKeyboardButton(
                     text=BotTexts.BTN_NO_DELETE,
-                    callback_data="delete_test_cancel"
+                    callback_data="delete_test_cancel",
+                    icon_custom_emoji_id="5985346521103604145"
                 )
             ]
         ]
@@ -120,8 +133,16 @@ def preview_kb() -> InlineKeyboardMarkup:
     
     return InlineKeyboardMarkup(
         inline_keyboard=[
-            [InlineKeyboardButton(text=BotTexts.BTN_CONFIRM, callback_data="confirm_test")],
-            [InlineKeyboardButton(text=BotTexts.BTN_CANCEL_TEST, callback_data="cancel_test")]
+            [InlineKeyboardButton(
+                text=BotTexts.BTN_CONFIRM,
+                callback_data="confirm_test",
+                icon_custom_emoji_id="5985596818912712352"),
+            ],
+            [InlineKeyboardButton(
+                text=BotTexts.BTN_CANCEL_TEST,
+                callback_data="cancel_test",
+                icon_custom_emoji_id="5985346521103604145")
+            ]
         ]
     )
     
@@ -133,7 +154,10 @@ def start_test_kb(slug: str) -> InlineKeyboardMarkup:
     
     return InlineKeyboardMarkup(
         inline_keyboard=[
-            [InlineKeyboardButton(text=BotTexts.BTN_START_TEST, callback_data=f"start_test:{slug}")]
+            [InlineKeyboardButton(
+                text=BotTexts.BTN_START_TEST,
+                callback_data=f"start_test:{slug}"
+            )]
         ]
     )
     
@@ -192,7 +216,11 @@ def my_tests_kb(all_tests: list, page: int) -> InlineKeyboardMarkup:
     keyboard.append(nav)
 
     keyboard.append([
-        InlineKeyboardButton(text=BotTexts.BTN_BACK, callback_data="back_to_start")
+        InlineKeyboardButton(
+            text=BotTexts.BTN_BACK,
+            callback_data="back_to_start",
+            icon_custom_emoji_id="5875082500023258804"
+        )
     ])
 
     return InlineKeyboardMarkup(inline_keyboard=keyboard)
@@ -204,25 +232,29 @@ def test_manage_kb(slug: str) -> InlineKeyboardMarkup:
             [
                 InlineKeyboardButton(
                     text=BotTexts.BTN_DOWNLOAD_RESULTS,
-                    callback_data=f"export_results:{slug}"
+                    callback_data=f"export_results:{slug}",
+                    icon_custom_emoji_id="5879883461711367869"
                 )
             ],
             [
                 InlineKeyboardButton(
                     text=BotTexts.BTN_CREATE_QR,
-                    callback_data=f"download_qr:{slug}"
+                    callback_data=f"download_qr:{slug}",
+                    icon_custom_emoji_id="5987917196469213507"
                 )
             ],
             [
                 InlineKeyboardButton(
                     text=BotTexts.BTN_DELETE,
-                    callback_data=f"delete_test:{slug}"
+                    callback_data=f"delete_test:{slug}",
+                    icon_custom_emoji_id="5879896690210639947"
                 )
             ],
             [
                 InlineKeyboardButton(
                     text=BotTexts.BTN_BACK,
-                    callback_data="my_tests"
+                    callback_data="my_tests",
+                    icon_custom_emoji_id="5875082500023258804"
                 )
             ]
         ]
