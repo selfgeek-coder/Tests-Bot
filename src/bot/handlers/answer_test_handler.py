@@ -28,12 +28,9 @@ async def start_test(cb: CallbackQuery, state: FSMContext):
     await state.set_state(PassTestFSM.waiting_fullname)
     await state.update_data(slug=slug)
 
-    await cb.answer("🖊")
-
     await cb.message.edit_text(
         BotTexts.ENTER_FULLNAME_PROMPT,
-        reply_markup=cancel_kb("answer_test"),
-        parse_mode="HTML"
+        reply_markup=cancel_kb("answer_test")
     )
     
     await cb.answer()
@@ -45,8 +42,7 @@ async def input_fullname(message: Message, state: FSMContext):
 
     if len(fullname.split()) < 2:
         await message.answer(
-            BotTexts.INVALID_FULLNAME_WARNING,
-            parse_mode="HTML"
+            BotTexts.INVALID_FULLNAME_WARNING
         )
         return
 
@@ -112,8 +108,7 @@ async def answer_test(cb: CallbackQuery, bot: Bot):
                     score=score,
                     total=total,
                     percent=percent
-                ),
-                parse_mode="HTML"
+                )
             )
 
             await bot.send_message(
@@ -127,8 +122,7 @@ async def answer_test(cb: CallbackQuery, bot: Bot):
                     total=total,
                     percent=percent,
                     grade=grade
-                ),
-                parse_mode="HTML"
+                )
             )
 
             SessionService.finish_test(db, cb.from_user.id)

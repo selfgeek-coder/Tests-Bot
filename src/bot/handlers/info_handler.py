@@ -10,6 +10,5 @@ router = Router()
 
 @router.message(Command("info"))
 async def info_handler(message: Message):
-    await message.answer("🤖")
-    await message.answer(BotTexts.INFO_MSG, parse_mode="HTML", reply_markup=close_kb())
+    await message.answer(BotTexts.INFO_MSG, reply_markup=close_kb())
         

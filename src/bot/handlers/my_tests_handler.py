@@ -62,7 +62,6 @@ async def my_test_detail(cb: CallbackQuery, bot: Bot):
 
     await cb.message.edit_text(
         text,
-        parse_mode="HTML",
         reply_markup=test_manage_kb(slug)
     )
 
@@ -74,8 +73,7 @@ async def delete_test_ask(cb: CallbackQuery):
 
     await cb.message.edit_text(
         BotTexts.DELETE_TEST_CONFIRM_MSG,
-        reply_markup=delete_confirm_kb(slug),
-        parse_mode="HTML"
+        reply_markup=delete_confirm_kb(slug)
     )
     
     

@@ -28,7 +28,6 @@ async def create_test(cb: CallbackQuery, state: FSMContext):
     
     await cb.message.answer(
         BotTexts.CREATE_TEST_PROMPT,
-        parse_mode="HTML",
         reply_markup=cancel_kb("test")
     )
     
@@ -80,7 +79,6 @@ async def set_count(message: Message, state: FSMContext):
 
     await wait.edit_text(
         preview,
-        parse_mode="HTML",
         reply_markup=preview_kb()
     )
 
@@ -109,8 +107,7 @@ async def confirm_test(cb: CallbackQuery, state: FSMContext, bot: Bot):
 
         media = InputMediaPhoto(
             media=qr_file,
-            caption=BotTexts.TEST_CREATED_TEMPLATE.format(test_link=test_link),
-            parse_mode="HTML"
+            caption=BotTexts.TEST_CREATED_TEMPLATE.format(test_link=test_link)
         )
 
         await cb.message.edit_media(media)

@@ -30,12 +30,10 @@ async def start_handler(message: Message):
                     topic=test['topic'],
                     questions_count=len(test['questions'])
                 ),
-                parse_mode="HTML",
                 reply_markup=start_test_kb(slug)
             )
             return
-
-        await message.answer("🤖")
+        
 
         # обычный /start
         await message.answer(
