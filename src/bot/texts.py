@@ -39,7 +39,7 @@ class BotTexts:
     TEST_DETAILS_TEMPLATE = "<b>{topic}</b>\n\nКоличество вопросов: <code>{questions_count}</code>\n\nСсылка для прохождения: {test_link}"
 
     # create test
-    CREATE_TEST_PROMPT = "Введите тему тестирования\n\nНапример:\n<code>Физика 8 класс, кипение воды</code>"
+    CREATE_TEST_PROMPT = "Введите тему тестирования\n\nНапример:\n<code>Создай тест по теме: Физика 8 класс, кипение воды. 5 Вопросов</code>"
     ENTER_QUESTION_COUNT = "Сколько вопросов?"
     INVALID_NUMBER_INPUT = "Введите число"
     GENERATION_ERROR = "Ошибка генерации"
@@ -66,6 +66,7 @@ Telegram: {telegram_name} @{username}
 Оценка: {grade}
     """
     CANCEL_TEST_MSG = "Прохождение теста отменено"
+    ALREADY_PASSED_MSG = "Вы уже проходили этот тест."
     
     
     # Клавиатуры

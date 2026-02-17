@@ -17,6 +17,14 @@ async def start_test(cb: CallbackQuery, state: FSMContext):
     slug = cb.data.split(":")[1]
 
     with SessionLocal() as db:
+        if not SessionService.can_start_test(db, cb.from_user.id, slug):
+            await cb.answer(
+                BotTexts.ALREADY_PASSED_MSG,
+                show_alert=True
+            )
+            await state.clear()
+            return
+        
         test = TestService.get_test(db, slug)
         if not test:
             await cb.answer(

@@ -19,8 +19,20 @@ class SessionService:
         :param slug: Уникальный ID теста
         :param fullname: ФИО пользователя
         """
-
+        
         return SessionRepository.create_session(db, user_id, slug, fullname)
+
+    @staticmethod
+    def can_start_test(db, user_id: int, slug: str) -> bool:
+        """
+        Проверка: можно ли начать тест
+        
+        :param user_id: ID пользователя
+        :param slug: ID теста
+        """
+        
+        exist = ResultRepository.get_result(db, user_id, slug)
+        return exist is None
 
     @staticmethod
     def get_session(db: Session, user_id: int) -> Optional[Dict]:

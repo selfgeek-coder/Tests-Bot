@@ -31,3 +31,10 @@ class ResultRepository:
             .order_by(TestResult.finished_at.desc())
             .all()
         )
+        
+    @staticmethod
+    def get_result(db: Session, user_id: int, slug: str):
+        return db.query(TestResult).filter(
+            TestResult.user_id == user_id,
+            TestResult.slug == slug
+        ).first()
