@@ -40,12 +40,11 @@ class AiService:
                 {"role": "user", "content": question},
             ],
             temperature=0.1,
-            max_tokens=5000,
+            max_tokens=10000,
         )
         
         text = response.choices[0].message.content.strip()
         
-        # убираем возможные ```json
         if text.startswith("```json"):
             text = text[7:]
         if text.startswith("```"):
@@ -55,7 +54,6 @@ class AiService:
         
         try:
             data = json.loads(text)
-            # Проверяем наличие обязательных полей
             if "questions" not in data or not isinstance(data["questions"], list):
                 return {}
             if "topic" not in data:
