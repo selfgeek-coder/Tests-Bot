@@ -19,6 +19,11 @@ class SessionService:
         :param slug: Уникальный ID теста
         :param fullname: ФИО пользователя
         """
+
+        existing_session = SessionRepository.get_session(db, user_id)
+        
+        if existing_session:
+            SessionRepository.delete_session(db, user_id)
         
         return SessionRepository.create_session(db, user_id, slug, fullname)
 

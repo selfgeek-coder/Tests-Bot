@@ -139,6 +139,11 @@ def preview_kb() -> InlineKeyboardMarkup:
                 icon_custom_emoji_id="5985596818912712352"),
             ],
             [InlineKeyboardButton(
+                text=BotTexts.BTN_REVISE_TEST,
+                callback_data="revise_test",
+                icon_custom_emoji_id="5879841310902324730")
+            ],
+            [InlineKeyboardButton(
                 text=BotTexts.BTN_CANCEL_TEST,
                 callback_data="cancel_test",
                 icon_custom_emoji_id="5985346521103604145")
