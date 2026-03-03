@@ -136,17 +136,20 @@ def preview_kb() -> InlineKeyboardMarkup:
             [InlineKeyboardButton(
                 text=BotTexts.BTN_CONFIRM,
                 callback_data="confirm_test",
-                icon_custom_emoji_id="5985596818912712352"),
+                icon_custom_emoji_id="5985596818912712352",
+                style="success"
+            ),
+            InlineKeyboardButton(
+                text=BotTexts.BTN_CANCEL_TEST,
+                callback_data="cancel_test",
+                icon_custom_emoji_id="5985346521103604145",
+                style="danger"
+            ),
             ],
             [InlineKeyboardButton(
                 text=BotTexts.BTN_REVISE_TEST,
                 callback_data="revise_test",
                 icon_custom_emoji_id="5879841310902324730")
-            ],
-            [InlineKeyboardButton(
-                text=BotTexts.BTN_CANCEL_TEST,
-                callback_data="cancel_test",
-                icon_custom_emoji_id="5985346521103604145")
             ]
         ]
     )
@@ -154,8 +157,11 @@ def preview_kb() -> InlineKeyboardMarkup:
 def revision_kb() -> InlineKeyboardButton:
     return InlineKeyboardMarkup(
         inline_keyboard=[
-            [InlineKeyboardButton(text=BotTexts.BTN_BACK_TO_REVIEW, callback_data="back_to_preview", icon_custom_emoji_id="5875082500023258804")],
-            [InlineKeyboardButton(text=BotTexts.BTN_CANCEL, callback_data="cancel_test", icon_custom_emoji_id="5985346521103604145")]
+            [InlineKeyboardButton(
+                text=BotTexts.BTN_BACK_TO_REVIEW,
+                callback_data="back_to_preview",
+                icon_custom_emoji_id="5875082500023258804"
+            )]
         ]
     )
     

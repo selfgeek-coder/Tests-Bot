@@ -90,7 +90,7 @@ async def process_revision(message: Message, state: FSMContext, bot: Bot):
         await message.answer(BotTexts.INVALID_NUMBER_INPUT)
         return
 
-    wait = await message.answer(BotTexts.REVISION_PROCESSING)
+    wait = await message.answer("⏳")
 
     data = await state.get_data()
     original_prompt = data.get("original_prompt", "")

@@ -46,10 +46,8 @@ class BotTexts:
     TEST_PREVIEW_TEMPLATE = "<tg-emoji emoji-id=\"5334882760735598374\">📝</tg-emoji> <b>Предпросмотр теста</b>\n\nТема: <i>{topic}</i>\n\n"
     TEST_CREATED_TEMPLATE = "<b>Тест успешно создан</b>\nСсылка для прохождения теста:\n{test_link}"
     TEST_SAVE_ERROR = "Ошибка при сохранении теста"
-    REVISION_PROMPT = "Опишите, что нужно изменить в тесте:\n\nНапример: \"Добавь еще 2 вопроса\", \"Сделай вопросы сложнее\", \"Измени тему на ...\""
+    REVISION_PROMPT = "<tg-emoji emoji-id=\"5334882760735598374\">📝</tg-emoji> <b>Опишите, что нужно изменить в тесте</b>\n\nНапример:\n<code>Добавь еще 2 вопроса</code>\n<code>Сделай вопросы сложнее</code>\n<code>Измени тему на ...</code>"
     REVISION_ERROR = "Не удалось внести правки. Попробуйте еще раз."
-    REVISION_PROCESSING = "⏳"
-    BACK_TO_PREVIEW = "Возвращаемся к просмотру теста"
 
     # answer test
     TEST_NOT_FOUND_ALERT = "<tg-emoji emoji-id=\"5465665476971471368\">❌</tg-emoji> Тест не найден.\nВозможно он был удален создателем..."
@@ -81,9 +79,9 @@ Telegram: {telegram_name} @{username}
     BTN_BACK = "Назад"
     BTN_CONFIRM = "Подтвердить"
     BTN_CANCEL_TEST = "Отменить"
-    BTN_REVISE_TEST = "Внести правки"
+    BTN_REVISE_TEST = "Изменить"
     BTN_START_TEST = "Начать прохождение"
-    BTN_BACK_TO_REVIEW = "Вернуться к просмотру"
+    BTN_BACK_TO_REVIEW = "Назад"
     BTN_YES_DELETE = "Да, удалить"
     BTN_NO_DELETE = "Отмена"
     BTN_DOWNLOAD_RESULTS = "Скачать результаты"
