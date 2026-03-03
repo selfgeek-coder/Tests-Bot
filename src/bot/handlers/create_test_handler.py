@@ -65,10 +65,6 @@ async def show_preview(message: Message, topic: str, questions: list):
     preview = BotTexts.TEST_PREVIEW_TEMPLATE.format(topic=topic)
     for i, q in enumerate(questions, 1):
         preview += f"{i}. {q['question']}\n"
-        if "options" in q:
-            for opt, text in q["options"].items():
-                preview += f"   {opt}) {text}\n"
-        preview += f"   Правильный ответ: {q['correct']}\n\n"
         
     preview += "\nПродолжить?"
 

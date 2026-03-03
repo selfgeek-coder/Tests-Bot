@@ -48,8 +48,8 @@ class BotTexts:
     TEST_SAVE_ERROR = "Ошибка при сохранении теста"
     REVISION_PROMPT = "Опишите, что нужно изменить в тесте:\n\nНапример: \"Добавь еще 2 вопроса\", \"Сделай вопросы сложнее\", \"Измени тему на ...\""
     REVISION_ERROR = "Не удалось внести правки. Попробуйте еще раз."
-    REVISION_PROCESSING = "🔄"
-    BACK_TO_PREVIEW = "↩️ Возвращаемся к просмотру теста"
+    REVISION_PROCESSING = "⏳"
+    BACK_TO_PREVIEW = "Возвращаемся к просмотру теста"
 
     # answer test
     TEST_NOT_FOUND_ALERT = "<tg-emoji emoji-id=\"5465665476971471368\">❌</tg-emoji> Тест не найден.\nВозможно он был удален создателем..."

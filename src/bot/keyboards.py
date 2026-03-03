@@ -154,8 +154,8 @@ def preview_kb() -> InlineKeyboardMarkup:
 def revision_kb() -> InlineKeyboardButton:
     return InlineKeyboardMarkup(
         inline_keyboard=[
-            [InlineKeyboardButton(text=BotTexts.BTN_BACK_TO_REVIEW, callback_data="back_to_preview")],
-            [InlineKeyboardButton(text=BotTexts.BTN_CANCEL, callback_data="cancel_test")]
+            [InlineKeyboardButton(text=BotTexts.BTN_BACK_TO_REVIEW, callback_data="back_to_preview", icon_custom_emoji_id="5875082500023258804")],
+            [InlineKeyboardButton(text=BotTexts.BTN_CANCEL, callback_data="cancel_test", icon_custom_emoji_id="5985346521103604145"))]
         ]
     )
     
