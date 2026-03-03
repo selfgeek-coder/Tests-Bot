@@ -1,3 +1,8 @@
+import asyncio
+import json
+
+from groq import Groq
+
 class AiService:
     @staticmethod
     async def get_answer(api_key: str, prompt: str) -> dict:
