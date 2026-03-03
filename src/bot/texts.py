@@ -83,6 +83,7 @@ Telegram: {telegram_name} @{username}
     BTN_CANCEL_TEST = "Отменить"
     BTN_REVISE_TEST = "Внести правки"
     BTN_START_TEST = "Начать прохождение"
+    BTN_BACK_TO_REVIEW = "Вернуться к просмотру"
     BTN_YES_DELETE = "Да, удалить"
     BTN_NO_DELETE = "Отмена"
     BTN_DOWNLOAD_RESULTS = "Скачать результаты"
